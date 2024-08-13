@@ -16,3 +16,9 @@ git push -u origin main --force
 
 
 https://ei5-focused-ohm.circumeo-apps.net/pick-model/
+
+
+https://colab.research.google.com/drive/1ZZ6ZG3W0yXtYAKOWK2JJAkjQ1sYmD8hF#scrollTo=hlH9SLOGOkgi
+
+
+AIzaSyAOt9uG_JHY-FBfNw1w0kl7GA8_54VtTas
