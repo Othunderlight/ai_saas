@@ -1,0 +1,17 @@
+channels[daphne]
+channels-redis
+cloudinary
+dj-database-url
+Django
+django-allauth
+django-cleanup
+django-environ
+django-extensions
+django-htmx
+gunicorn
+hyperlink
+psycopg2-binary
+redis
+shortuuid
+urllib3
+whitenoise
