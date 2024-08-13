@@ -20,8 +20,8 @@ class AiModel(models.Model):
     languages= models.CharField(max_length=255, blank=True, default='')
     tokens= models.CharField(max_length=255, blank=True, default='')  
     api= models.CharField(max_length=255, blank=True, default='')   
-    img_icon= models.ImageField(upload_to='/', default='')
-    img_hero= models.ImageField(upload_to='/', default='')
+    img_icon= models.ImageField(upload_to='uploads/', default='')
+    img_hero= models.ImageField(upload_to='uploads/', default='')
 
     def __str__(self):
         return f'{self.name}'
