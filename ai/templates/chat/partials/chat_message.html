@@ -1,0 +1,78 @@
+{% load static %} 
+
+
+		{% if message.author.username == 'ai_user' %}
+<div>
+	<div id="chatMessage" class="mb-2 text-[#efefef] font-sans after:block after:clear-both z-0">
+		<div class="mb-1 text-xs">{{message.author}}: </div>
+
+		<div class="relative md:max-w-[70%] float-left cursor-pointer hover:text-gray-400">
+			<div class="_chatMessageTextWrap_8y1g3_1">
+				<div class="scale-0 absolute">
+					<textarea class="bg-moeblack w-full outline-none" cols="72" style="height: 180px;">
+						{{ message.body }}
+					</textarea>
+				</div>
+				<div>
+					<p>
+						{{ message.body }}
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<img id="loadingImage" src="{% static 'app/svg/loading-1.svg' %}" alt="loading spinner" style="width: 100px; min-width: 100px; float: right; display: none;">
+</div>
+
+
+
+		{% elif message.author == user %}
+<div>
+	<div id="chatMessage" class="mb-2 text-[#efefef] font-sans after:block after:clear-both z-0 text-right">
+		<div class="mb-1 text-xs">{{message.author}}: </div>
+		<div class="relative md:max-w-[70%] float-left !float-right cursor-pointer hover:text-gray-400">
+			<div class="_chatMessageTextWrap_8y1g3_1 _user_8y1g3_31">
+				<div class="scale-0 absolute">
+					<textarea class="bg-moeblack w-full outline-none" cols="72" style="height: 40px;">
+						{{message.body}}
+					</textarea>
+				</div>
+				<div>
+					<p>{{message.body}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+		{% else %}
+<div>
+	<div id="chatMessage" class="mb-2 text-[#efefef] font-sans after:block after:clear-both z-0">
+		<div class="mb-1 text-xs">{{message.author}}: </div>
+
+		<div class="relative md:max-w-[70%] float-left cursor-pointer hover:text-gray-400">
+			<div class="_chatMessageTextWrap_8y1g3_1">
+				<div class="scale-0 absolute">
+					<textarea class="bg-moeblack w-full outline-none" cols="72" style="height: 180px;">
+						{{message.body}}
+					</textarea>
+				</div>
+				<div>
+					<p>
+						{{message.body}}
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<img src="./Raiden Shogun -Talk with AI character_files/loading-1.svg" alt="loading spinner" style="width: 100px; min-width: 100px; float: right; display: none;">
+</div>
+
+		{% endif %}

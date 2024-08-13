@@ -1,0 +1,365 @@
+{% extends 'chat/base.html' %}
+{% load static %} 
+
+
+
+
+
+
+
+{% block content %}
+
+<div id="main-window-wrap" class="z-0 h-[calc(100%-56px)] max-h-[calc(100%-56px)] md:h-[calc(100%-78px)] md:max-h-[calc(100%-78px)]">
+  <div id="main-window" class="bg-[image:var(--image-url)]&#39; bg-cover">
+  <div class="flex flex-col gap-4 bg-black mt-4">
+  <div class="flex h-[60vh] w-full relative mt-4">
+  <div class="absolute top-0 left-0 right-0 bottom-0" style="background: linear-gradient(rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.796) 20%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.796) 80%, rgb(0, 0, 0) 100%);">
+</div>
+<div class="flex flex-col items-center gap-2 absolute top-0 w-full pt-4 z-10">
+  <h1 class="text-4xl font-bold">{{ ai_model.name }}
+</h1>
+<div class="flex gap-2">
+  <h2 class="font-bold text-gray-500 cursor-pointer hover:text-moeblue transition-colors">
+    {{ ai_model.main_tag }} 
+</h2>
+<div>
+</div>
+</div>
+</div>
+<div class="w-full h-full" id="avatarWrap">
+  <img src="{{ ai_model.img_hero.url }}" class="w-full h-full object-cover" alt="avatar image">
+</div>
+
+
+<div class="absolute bottom-0 w-full flex gap-2 flex-col justify-center pb-4 px-4">
+  <div class="flex gap-2 items-center px-4 justify-center">
+
+  {% if ai_model.tags %}
+  <div class="text-xs bg-moeblue rounded-full px-2 py-1">
+    {{ ai_model.tags }}
+  </div>
+  {% endif %}
+
+</div>
+
+</br>
+
+<div style="display: flex; justify-content: center; flex-direction: row;">
+  <div style="max-width: 20px; color: transparent;">v</div>
+<a class="_button_1n90k_493 bg-black !border-moeblue text-moeblue font-bold" 
+    style="flex: 1" 
+    href="{% url 'start' ai_model.name %}">
+  Chat Now
+</a>
+  <div style="max-width: 20px; color: transparent;">h</div>
+</div>
+
+</div>
+</div>
+
+
+
+ 
+<div style="display: flex; justify-content: center; flex-direction: row;">
+  <div style="width: 20px; color: transparent;">v</div>
+
+<div style="display: grid; grid-gap: 10px; grid-column: 2; justify-content: center;">
+
+  {% if ai_model.senario_1 %}
+  <div class="relative min-w-[300px] max-w-[600px] bg-moeblack border border-moelightgray rounded-lg px-4 pt-2 pb-6">
+    <div class="_textareaWrap_1n90k_218"><label>Scenario</label>
+      <div class="max-h-[200px] _readOnly_1n90k_273">
+        {{ ai_model.senario_1 }}
+      </div>
+    </div>    
+  </div>
+
+  <div class="relative min-w-[300px] max-w-[600px] bg-moeblack border border-moelightgray rounded-lg px-4 pt-2 pb-6">
+    <div class="_textareaWrap_1n90k_218"><label>Scenario</label>
+      <div class="max-h-[200px] _readOnly_1n90k_273">
+        {{ ai_model.senario_2 }}
+      </div>
+    </div>    
+  </div>
+
+  <div class="relative min-w-[300px] max-w-[600px] bg-moeblack border border-moelightgray rounded-lg px-4 pt-2 pb-6">
+    <div class="_textareaWrap_1n90k_218"><label>Scenario</label>
+      <div class="max-h-[200px] _readOnly_1n90k_273">
+        {{ ai_model.senario_3 }}
+      </div>
+    </div>    
+  </div>
+  {% endif %}
+
+</div>
+
+  <div style="max-width: 20px; color: transparent;">h</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% if ai_model.skills %}
+<div style="display: flex; justify-content: center; flex-direction: row;">
+  <div style="width: 12px; color: transparent;">v</div>
+
+<div class="relative min-w-[300px] max-w-[600px] bg-moeblack border border-moelightgray rounded-lg px-4 pt-2 pb-6" style="flex: 1">
+  <div class="flex flex-col gap-2 text-sm">
+
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2 relative">Character Info
+    <button id="infoButton">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+      </svg>
+    </button>
+    </div>
+  
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Models
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;/assets/logo-llm.svg?w=200&amp;h=200&quot;);">
+  </span> Moemate LLM 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+  </div>
+  </div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Voice
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;/models/azure.png&quot;);">
+  </span> Nancy
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Selfie
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;banners/anythingv4.png&quot;);">
+  </span> Anything v4 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Image
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;banners/anythingv4.png&quot;);">
+  </span> Anything v4 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+</div>
+</div>
+</div>
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2 relative">Skills
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+</svg>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Converse
+  </div>
+  <div>Enabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Image Generation
+  </div>
+  <div>Disabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Take Selfie
+  </div>
+  <div>Enabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Web Search
+  </div>
+  <div>Disabled
+  </div>
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="flex gap-2 relative">Languages
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+    </svg>
+</div>
+  <div>English (US)
+  </div>
+</div>
+</div>
+</div>
+
+  <div style="max-width: 20px; color: transparent;">h</div>
+</div>
+{% endif %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="popup" class="hidden" style="display: flex; justify-content: center; flex-direction: row;">
+  <div style="width: 12px; color: transparent;">v</div>
+
+<div class="relative min-w-[300px] max-w-[600px] bg-moeblack border border-moelightgray rounded-lg px-4 pt-2 pb-6" style="flex: 1">
+  <div class="flex flex-col gap-2 text-sm">
+
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2 relative">Character Info
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+    </svg>
+    </div>
+  
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Models
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;/assets/logo-llm.svg?w=200&amp;h=200&quot;);">
+  </span> Moemate LLM 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+  </div>
+  </div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Voice
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;/models/azure.png&quot;);">
+  </span> Nancy
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Selfie
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;banners/anythingv4.png&quot;);">
+  </span> Anything v4 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Image
+  </div>
+  <div class="flex items-center">
+    <span class="flex h-4 w-4 bg-cover bg-center bg-no-repeat rounded-sm mr-2" style="background-image: url(&quot;banners/anythingv4.png&quot;);">
+  </span> Anything v4 
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3 ml-0.5 mr-0.5 h-5 animate-spin hidden"><line x1="12" x2="12" y1="2" y2="6"></line><line x1="12" x2="12" y1="18" y2="22"></line><line x1="4.93" x2="7.76" y1="4.93" y2="7.76"></line><line x1="16.24" x2="19.07" y1="16.24" y2="19.07"></line><line x1="2" x2="6" y1="12" y2="12"></line><line x1="18" x2="22" y1="12" y2="12"></line><line x1="4.93" x2="7.76" y1="19.07" y2="16.24"></line><line x1="16.24" x2="19.07" y1="7.76" y2="4.93"></line>
+  </svg>
+</div>
+</div>
+</div>
+  <div class="flex flex-col gap-2">
+    <div class="flex gap-2 relative">Skills
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+</svg>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Converse
+  </div>
+  <div>Enabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Image Generation
+  </div>
+  <div>Disabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Take Selfie
+  </div>
+  <div>Enabled
+  </div>
+</div>
+  <div class="flex justify-between">
+    <div class="text-[#616161]">Web Search
+  </div>
+  <div>Disabled
+  </div>
+</div>
+</div>
+  <div class="flex justify-between">
+    <div class="flex gap-2 relative">Languages
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="stroke-moeblue cursor-pointer"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line>
+    </svg>
+</div>
+  <div>English (US)
+  </div>
+</div>
+</div>
+</div>
+
+  <div style="max-width: 20px; color: transparent;">h</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block javascript %}
+<script type="text/javascript">
+  // Get elements
+  const infoButton = document.getElementById("infoButton");
+  const popup = document.getElementById("popup");
+
+  // Toggle popup visibility when info button is clicked
+  infoButton.addEventListener("click", function() {
+      popup.classList.toggle("hidden");  // Toggles visibility
+  });
+
+  // Hide the popup when the user clicks outside of it
+  document.addEventListener("click", function(event) {
+      const isClickInside = popup.contains(event.target) || infoButton.contains(event.target);
+
+      if (!isClickInside) {
+          popup.classList.add("hidden");  // Hide the popup
+      }
+  });
+</script>
+{% endblock %}

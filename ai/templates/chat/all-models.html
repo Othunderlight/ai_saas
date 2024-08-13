@@ -1,0 +1,118 @@
+{% extends 'chat/base.html' %}
+{% load static %} 
+
+
+
+
+
+
+
+{% block content %}
+
+
+<div class="block w-full bg-moeblack transition-all duration-300">
+  <div class="max-w-[1400px] m-auto w-full">
+
+
+    <div class="relative bg-moelightblack mt-4 border border-moelightgray rounded-3xl font-sans m-4">
+
+      <!-- second bar -->
+      <div class="justify-between mt-0 mr-2 mb-4 ml-2">
+        <div class="w-full h-[50px] border-b border-moelightgray pb-6 relative z-10">
+
+          <div class="w-[38px] md:w-[120px] text-white font-sans font-bold indent-3 rounded-2xl md:rounded-3xl float-right relative top-[6px] pt-1 pb-1 border border-moelightgray sm:block group">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative m-auto md:float-right right-[-1px] md:right-2 text-moelightgray group-hover:none"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line>
+            </svg>
+              <span class="hidden md:inline">Create</span>
+          </div>
+
+          <div class="absolute top-[6px] rounded-full border p-1 border-moelightgray text-white w-[38px] h-[38px] md:w-[150px] text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="md:float-left relative top-[1px] md:left-[2px] text-moelightgray"><path d="m3 16 4 4 4-4"></path><path d="M7 20V4"></path><path d="M11 4h10"></path><path d="M11 8h7"></path><path d="M11 12h4"></path>
+            </svg>
+            <span class="text-xs font-sans font-bold hidden md:inline">Random 🎲</span>
+          </div>
+
+          <input class="bg-[#141414] mt-2 text-xs md:text-base text-white text-left h-[36px] pr-10 rounded-3xl font-sans indent-4 border border-moelightgray float-right mr-3 w-[calc(100%-100px)] sm:w-[calc(100%-300px)] focus:outline-none focus:border-moeblue placeholder:text-moelightgray" placeholder="Search...">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-moelightgray absolute top-[14px] right-16 md:right-[150px] pointer-events-none"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
+            </svg>
+
+        </div>
+      </div>
+      <!-- end second bar -->
+
+
+      <div class="flex flex-col justify-center items-center px-4 pt-4 md:pt-0 md:px-0">
+        <div class="text-moeblue text-center">Try out our featured bots</div>
+      </div>
+
+
+      <!-- models -->
+      <div>
+        <div class="tooltipBoundary flex justify-center gap-4 flex-col px-6 py-4 pb-6">
+          <div class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-flow-row gap-4 w-full justify-center">
+
+            {% for ai_model in ai_models %}
+            <div aria-describedby="popup-2">
+              <a class="flex group flex-none box-border relative w-full border-2 border-moelightgray rounded-lg bg-moelightblack cursor-pointer transition-border ease-in-out duration-300 hover:border-moeblue overflow-hidden" href="{% url 'model-page' ai_model.name %}">
+                <img src="{{ ai_model.img_icon.url }}" class=" object-cover object-left-top float-left rounded-tl-md rounded-bl-md block relative w-[100px] h-[100px] min-w-[100px] border-r border-moelightgray" alt="card thumbnail">
+                <div class="w-[calc(100%-100px)] box-border pt-1 pb-1 pl-2 pr-2 z-10">
+                  <span class="text-white text-sm overflow-hidden text-ellipsis whitespace-nowrap box-border pr-10 mb-1 block relative font-sans w-full font-bold justify-self-center">
+                    {{ ai_model.name }}
+                  </span>
+                  <span class="card-desc">
+                    <p>{{ ai_model.short_discription }}</p>
+                  </span>
+                  <div class="absolute bottom-0 right-0 flex gap-1 items-end">
+                    <button class="max-w-[100px] z-30 truncate ease-in-out duration-300 rounded-tl-lg font-bold pt-2 pr-2 pb-1 pl-2 bg-moelightgray font-sans text-xs cursor-pointer leading-3 text-center text-white hover:bg-moeblue">
+                        {{ ai_model.main_tag }}
+                    </button>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+            
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- end models -->
+
+
+    <!-- suggestions -->
+    <div class="border border-moelightgray rounded-3xl m-4 mt-8 p-6 flex flex-col justify-center items-center gap-6 bg-moelightblack">
+      <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-row gap-4 w-full">
+
+        <div class=" bg-moedarkgray hover:bg-moemediumgray border border-moelightgray rounded-full cursor-pointer flex gap-4 items-center overflow-hidden  transition-colors">
+          <div class="h-[50px] w-[50px] bg-cover bg-center">
+          </div>
+          <div class="text-sm md:text-base">Learn a new language</div>
+        </div>
+
+        <div class=" bg-moedarkgray hover:bg-moemediumgray border border-moelightgray rounded-full cursor-pointer flex gap-4 items-center overflow-hidden  transition-colors">
+          <div class="h-[50px] w-[50px] bg-cover bg-center">
+          </div>
+          <div class="text-sm md:text-base">Plan your next vacation</div>
+        </div>
+
+        <div class=" bg-moedarkgray hover:bg-moemediumgray border border-moelightgray rounded-full cursor-pointer flex gap-4 items-center overflow-hidden  transition-colors">
+          <div class="h-[50px] w-[50px] bg-cover bg-center">
+          </div>
+          <div class="text-sm md:text-base">Brainstorm an idea</div>
+        </div>
+
+        <div class=" bg-moedarkgray hover:bg-moemediumgray border border-moelightgray rounded-full cursor-pointer flex gap-4 items-center overflow-hidden  transition-colors">
+          <div class="h-[50px] w-[50px] bg-cover bg-center">
+          </div>
+          <div class="text-sm md:text-base">Generate wallpapers</div>
+        </div>
+
+      </div>
+    </div>
+    <!-- end suggestions -->
+
+
+
+{% endblock %}

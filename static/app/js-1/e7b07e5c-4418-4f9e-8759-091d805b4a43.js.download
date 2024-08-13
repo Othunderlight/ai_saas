@@ -1,0 +1,49 @@
+(function() {
+var el = document.createElement('script');
+el.src = 'https://app.ablecdp.com/ue.js';
+el.async = 'true';
+el.addEventListener('load', function() {
+uipe('init', 'e7b07e5c-4418-4f9e-8759-091d805b4a43');
+uipe('track', 'PageView');
+function processStripeLinks() {
+    const stripeLinks = document.querySelectorAll('a[href^="https://buy.stripe.com"]');
+    let uuid;
+
+    if (stripeLinks.length === 0) {
+        return null;
+    }
+
+    for (const link of stripeLinks) {
+        const url = new URL(link.href);
+        const clientReferenceId = url.searchParams.get('client_reference_id');
+        
+        if (clientReferenceId) {
+            return clientReferenceId;
+        }
+    }
+
+    uuid = localStorage.getItem('stripe_client_reference_id');
+    if (uuid) {
+      return uuid;
+    }
+
+    uuid = crypto.randomUUID();
+    localStorage.setItem('stripe_client_reference_id', uuid);
+    
+    for (const link of stripeLinks) {
+        const url = new URL(link.href);
+        url.searchParams.set('client_reference_id', uuid);
+        link.href = url.toString();
+    }
+
+    return uuid;
+}
+
+const stripeClientRef = processStripeLinks();
+if (stripeClientRef)
+  window.uipe('track', 'PaymentLinkShown', { keys: { client_id: stripeClientRef } });
+
+
+});
+document.head.appendChild(el);
+})();

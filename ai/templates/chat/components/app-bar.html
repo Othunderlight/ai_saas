@@ -1,0 +1,160 @@
+  {% load static %} 
+
+
+  <!-- app bar --> 
+
+    <div id="topNavigation" class="relative z-[100] bg-moeblack font-sans m-auto max-w-[1600px] transition-all duration-300 px-2 md:px-4">
+  <div class="flex justify-start md:grid md:grid-cols-12 items-center w-full m-auto text-center relative transition-height h-[44px] md:h-[70px] pt-1" style="">
+
+
+
+
+
+<!-- Hamburger Menu for Mobile -->
+    <div class="md:hidden flex items-center" style="margin-left: 10px; margin-right: 10px;">
+      <button id="infoButton" class="text-white focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+
+
+
+
+
+  <div class="hidden md:flex" style="grid-area: 1 / 1 / 2 / 6;">
+    <ul class="m-0 p-0 flex gap-3 lg:gap-4 list-none md:ml-2">
+
+    <li class="text-base relative cursor-pointer p-0 border border-1 border-white rounded-md hover:text-moeblue hover:border-moeblue flex justify-center items-center">
+      <a href="{% url 'pick-model' %}" class="cursor-pointer no-underline text-inherit inline-block rounded pb-[2px] px-5">  Discover
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" href="https://www.moemate.io/subscribe">
+        Account
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" href="https://www.moemate.io/affiliate">
+        Pricing
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <div class="group hover:text-moeblue flex justify-center items-center h-full">
+        <div>AboutUs</div>
+      </div>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 text-gray-200 flex justify-center items-center">
+      <div class="cursor-pointer no-underline text-inherit flex justify-center items-center gap-2 relative text-white hover:text-moeblue">
+        <span class="font-bold">Guide</span>
+      </div>
+    </li>
+
+    </ul>
+  </div>
+
+
+  <div class="flex justify-center" style="grid-area: 1 / 6 / 2 / 8;">
+    <a href="https://www.moemate.io/">
+      <img class="hidden min-[1240px]:block h-10" src="{% static './app/svg/logo.svg' %}" alt="moemate logo">
+      <img class="md:hidden min-[1095px]:block min-[1240px]:hidden h-8" src="{% static './app/svg/logo-mobile.svg' %}" alt="moemate logo">
+    </a>
+  </div>
+
+
+  <div class="flex justify-end ml-auto" style="grid-area: 1 / 8 / 2 / 13;">
+    <ul class="flex gap-4 list-none mr-2">
+      <li>
+        <div class="relative cursor-pointer rounded-3xl h-8 pr-12 pl-4 leading-8 bg-moelightblack border border-moelightgray hover:bg-moeblue">
+
+          {% if user.is_authenticated %}
+          <a class="font-sans float-left font-semibold leading-[25px] text-[#efefef] whitespace-nowrap"   href="{% url 'logout' %}">LogOut</a>
+          {% else %}
+          <a class="font-sans float-left font-semibold leading-[25px] text-[#efefef] whitespace-nowrap"   href="{% url 'login' %}">Login</a>
+          {% endif %}
+          
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white absolute float-right right-4 top-1 ">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" x2="3" y1="12" y2="12"></line>
+          </svg>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>
+</div>
+<!-- end app bar --> 
+
+
+
+<div id="popup" class="hidden" style="position: absolute; z-index: 100">
+  <ul class="m-0 p-0 flex gap-3 lg:gap-4 list-none md:ml-2 bg-moelightblack border border-moelightgray rounded-md" style="display: grid; grid-column: 1; margin-left: 10px; margin-top: 10px; padding-bottom: 10px;">
+
+    <li class="text-base relative cursor-pointer p-0 border border-1 border-white rounded-md hover:text-moeblue hover:border-moeblue flex justify-center items-center">
+      <a href="{% url 'pick-model' %}" class="cursor-pointer no-underline text-inherit inline-block rounded pb-[2px] px-5">  Discover
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" 
+          href="{% url 'error' %}">
+        Account
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" 
+          href="{% url 'error' %}">
+        Pricing
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" 
+          href="{% url 'error' %}">
+        AboutUs
+      </a>
+    </li>
+
+    <li class="text-base relative cursor-pointer p-0 flex justify-center items-center">
+      <a class="cursor-pointer no-underline text-inherit inline-block hover:text-moeblue" 
+          href="{% url 'error' %}">
+        <span class="font-bold">Guides</span>
+      </a>
+    </li>
+   </ul> 
+</div>
+
+
+
+{% block javascript %}
+<script type="text/javascript">
+  // Get elements
+  const infoButton = document.getElementById("infoButton");
+  const popup = document.getElementById("popup");
+
+  // Toggle popup visibility when info button is clicked
+  infoButton.addEventListener("click", function() {
+      popup.classList.toggle("hidden");  // Toggles visibility
+  });
+
+  // Hide the popup when the user clicks outside of it
+  document.addEventListener("click", function(event) {
+      const isClickInside = popup.contains(event.target) || infoButton.contains(event.target);
+
+      if (!isClickInside) {
+          popup.classList.add("hidden");  // Hide the popup
+      }
+  });
+</script>
+{% endblock %}

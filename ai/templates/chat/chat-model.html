@@ -1,0 +1,148 @@
+{% extends 'chat/base_chat.html' %}
+{% load static %} 
+
+
+
+
+
+
+
+{% block content %}
+
+
+
+
+<!--
+<div id="main-window-wrap" class="z-0 h-[calc(100%-56px)] max-h-[calc(100%-56px)] md:h-[calc(100%-78px)] md:max-h-[calc(100%-78px)]">
+	<div id="main-window" class="w-full h-full px-4 mx-auto transition-all duration-300 mt-3 md:mt-2 flex lg:grid lg:grid-cols-12 gap-4 relative overflow-hidden">
+
+
+
+<div class="m-auto h-full max-h-full overflow-auto w-full box-border relative bg-moeblack/70 rounded-3xl border border-gray-700 overflow-x-hidden" style="grid-area: 1 / 3 / 2 / 11;">
+    -->
+
+<div style="">    
+	<div id="app-chat" class="h-full w-full pl-16 pt-0 pr-6 pb-4" style="padding-right: 14px">
+
+
+		<div class="absolute top-0 right-0 w-full box-border pt-4 z-20">
+
+			<ul class="list-none flex gap-1 sm:gap-2 md:gap-4 justify-center items-center absolute top-[28px] right-6 z-20"><li class="cursor-pointer">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></li>
+			</ul>
+
+
+		<div class="border-b-gray-700 border-b flex pb-3 relative">
+			<span class="absolute float-left font-sans text-xs left-[73px] top-[34px] cursor-pointer text-gray-300">{{ chat_ai_model.main_tag }}
+			</span>
+
+			<div class="ml-4 border-white border-opacity-[0.10] rounded-lg flex items-center gap-2 p-2 transition-colors cursor-pointer">
+				<div class="w-10 h-10 border-2 border-gray-700 rounded-full bg-top bg-cover bg-no-repeat" style="background-image: url({{ chat_ai_model.img_icon.url }});">
+				</div>
+			
+				<div class="text-gray-100 relative bottom-3 font-bold font-sans">
+					<h2 class="m-0 p-0 capitalize text-lg ">{{ chat_ai_model.name }}</h2>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</br>
+
+
+
+
+
+
+
+
+<div id="chat-messages" class="overflow-x-hidden overflow-y-scroll block text-sm relative top-[91px] -ml-10 transition-blur false " style="height: calc((100% - 146px) - 54px + 54px);">
+
+	<div id="chat_messages">
+		{% for message in chat_messages %}
+            {% include 'chat/partials/chat_message.html' %}
+        {% endfor %}
+    </div>    
+		
+</div>
+
+</div>
+
+<div class="messageBox" style="width: 100%; position: fixed; z-index: 1000; bottom: 1">
+    <form id="chat_message_form" style="flex: 1; color: transparent; background: transparent;" 
+          hx-ext="ws"
+          ws-connect="/ws/chatroom/{{ chatroom_name }}"
+          ws-send
+          _="on htmx:wsAfterSend reset() me"
+          hx-trigger="submit"
+          hx-indicator="#loadingImage">
+        {% csrf_token %}
+        {{ chat_form }}
+    </form>
+
+    <button id="sendButton" type="submit">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 664 663">
+            <path
+                fill="none"
+                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+            ></path>
+            <path
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="33.67"
+                stroke="#6c6c6c"
+                d="M646.293 331.888L17.7538 17.6187L155.245 331.888M646.293 331.888L17.753 646.157L155.245 331.888M646.293 331.888L318.735 330.228L155.245 331.888"
+            ></path>
+        </svg>
+    </button>
+</div>
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+{% block javascript %}
+<script>
+
+    function scrollToBottom() {
+    	const msgContainer = document.getElementById('chat-messages');
+    	msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+    scrollToBottom();
+
+    document.addEventListener('DOMContentLoaded', function() {
+        scrollToBottom(); // Ensure it scrolls to the bottom when the page loads
+    });
+
+    document.addEventListener('htmx:wsMessage', function(event) {
+        const data = JSON.parse(event.detail.data);
+        const chatMessages = document.getElementById('chat_messages');
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data.html;
+        chatMessages.appendChild(tempDiv.firstChild);
+        scrollToBottom(); // Scroll to the bottom when a new message arrives
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var sendButton = document.getElementById('sendButton');
+        var chatForm = document.getElementById('chat_message_form');
+
+        sendButton.addEventListener('click', function() {
+            chatForm.dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}));
+        });
+    });
+
+</script>
+{% endblock %}

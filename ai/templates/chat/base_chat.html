@@ -1,0 +1,65 @@
+{% load static %} 
+
+<!DOCTYPE html>
+
+<html lang="en" class="auto" data-critters-container>
+
+<head>
+	<meta charset="utf-8">
+	{% block title %}
+  {% endblock %}
+
+	<meta name="description" content="Poe lets you ask questions, get instant answers, and have back-and-forth conversations with AI. Gives access to GPT-4, gpt-3.5-turbo, Claude from Anthropic, and a variety of other bots.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="next-head-count" content="4">
+
+  <meta name="msapplication-TileColor" content="#0D0D0F">
+  <meta name="theme-color" content="#0D0D0F">
+  <meta name="msapplication-TileColor" content="#0D0D0F">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+
+  {% block icon_page %}
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+  {% endblock %}
+  
+  <link rel="stylesheet" href="{% static './app/css/index-3.css' %}">
+  <link rel="stylesheet" href="{% static './app/css/uiverse.css' %}">
+
+  <script src="{% static 'app/js/htmx.min.js' %}"></script>
+  <script src="{% static 'app/js/ws.js' %}"></script>
+  <script src="{% static 'app/js/hyperscript.min.js' %}"></script>  
+</head>  
+
+<body style="">
+  
+  <div id="root">
+    <div id="mainWindow" style="height: calc(727px); max-height: calc(727px); width: 100%; overflow: hidden auto;">
+
+      {% if messages %}
+        {% include 'chat/components/notification.html' %}
+      {% endif %}
+        
+
+
+
+      {% block content %}
+      {% endblock %}
+
+
+
+
+
+
+
+  
+
+
+  <script type="text/javascript">
+    document.getElementById("closeButton").addEventListener("click", function() {
+        document.getElementById("notification").style.display = "none";
+    });
+  </script>
+  {% block javascript %}
+  {% endblock %}
+</body>
+</html>    

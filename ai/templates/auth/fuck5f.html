@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en" class="auto" data-critters-container>
+
+<head>
+	<meta charset="utf-8">
+	<title>Poe - Fast, Helpful AI Chat</title>
+
+	<meta name="description" content="Poe lets you ask questions, get instant answers, and have back-and-forth conversations with AI. Gives access to GPT-4, gpt-3.5-turbo, Claude from Anthropic, and a variety of other bots.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="next-head-count" content="4">
+
+  <meta name="msapplication-TileColor" content="#0D0D0F">
+  <meta name="theme-color" content="#0D0D0F">
+  <meta name="msapplication-TileColor" content="#0D0D0F">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+
+  <link rel="stylesheet" href="{% static './app/css/index-1.css' %}">
+  <link rel="stylesheet" href="{% static './app/css/index-2.css' %}">
+  <link rel="stylesheet" href="{% static './app/css/index-3.css' %}">
+  <link rel="stylesheet" href="{% static './app/css/uiverse.css' %}">
+
+  <script src="{% static 'app/js/htmx.min.js' %}"></script>
+  <script src="{% static 'app/js/ws.js' %}"></script>
+  <script src="{% static 'app/js/hyperscript.min.js' %}"></script>  
+</head>  
+
+<body>
+  
+  <div id="root">
+    <div id="mainWindow" style="height: calc(727px); max-height: calc(727px); width: 100%; overflow: hidden auto;">
+
+      {% if messages %}
+        {% include 'chat/components/notification.html' %}
+      {% endif %}
+        
+      {% include 'chat/components/app-bar.html' %}
+
+
+
+      {% block content %}
+      {% endblock %}
+
+
+
+
+
+
+
+      <!-- terms -->
+      <ul class="flex flex-1 justify-center items-center text-moelightgray gap-5 relative top-10 z-[1]">
+        <li>
+          <a href="https://moemate.io/discover/terms">Terms</a>
+        </li>
+        <li>
+          <a href="https://moemate.io/discover/privacy">Privacy</a>
+        </li>
+      </ul>
+      <!-- end terms -->
+
+      <!-- social -->
+      <div class="relative w-full mt-4 bottom-0 flex flex-col gap-4">
+        <div class="m-auto flex justify-center gap-6 text-center mt-12">
+
+          <a href="https://discord.gg/Xa5tfypYVm" target="_blank" class="cursor-pointer w-6 h-6 text-moelightgray hover:text-moeblue fill-current">
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" fill="currentColor" xml:space="preserve">
+            <path d="M736.9,265.1l-106-125.8l-129-44.7l-32.7,47.5l-70.5-10.2l-70.5,10.2l-32.6-47.5l-128.5,44.7l-106,125.8L6,451l29.3,152.6 l67.3,56.4l122.5,44.4l26.1-52.1l-52.3-48.4l6.8-19.7l47.2,25.3l71.3,20.7l74.7,5.5l74.7-5.5l71.3-21l47.2-25.3l6.8,19.7L546.8,652 l26.1,52.1l122.5-44.4l67.3-56.4L792,450.7L736.9,265.1z M310.1,498.5l-47.2,5.9L217.1,468l-8.5-70l42.6-51.2l48.3-3.4l39.2,44.4 l6,63.8L310.1,498.5z M581.4,467.9l-45.8,36.4l-47.2-5.9l-34.7-47.2l6-63.8l39.2-44.4l48.3,3.4l42.6,51.2L581.4,467.9z"></path>
+            </svg>
+          </a>
+
+          <a href="https://linktr.ee/moemate" target="_blank" class="cursor-pointer w-6 h-6 text-moelightgray hover:text-moeblue fill-current">
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" fill="currentColor" xml:space="preserve">
+            <style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd; fill:"currentColor"}</style><g><path class="st0" d="M352.1,515.8h93.8V735h-93.8V515.8z"></path><path class="st0" d="M136.2,291.5h159.4L182.1,179.8l62.5-66.2l108,114.8V65h93.8v163.3l108-114.8l62.5,66.2L503.4,291.4h159.5 v92.4H502.4l114,114.8l-62.5,64.7L399,402.1L244.1,563.3l-62.5-64.7l114-114.8H135.2v-92.3H136.2z"></path></g>
+            </svg>
+          </a>
+
+          <a href="https://x.com/moemateai" target="_blank" class="cursor-pointer w-6 h-6 text-moelightgray hover:text-moeblue fill-current">
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" fill="currentColor" xml:space="preserve"><g id="layer1" transform="translate(52.390088,-25.058597)"><path id="path1009" d="M18.1,115.1L273.8,457L16.4,735.1h57.9l225.3-243.4l182,243.4h197.1L408.7,373.8l239.5-258.8h-57.9 L382.8,339.1L215.3,115.1H18.1z M103.2,157.6h90.6l399.9,534.7h-90.6L103.2,157.6z"></path></g>
+            </svg>
+          </a>
+
+          <a href="https://www.instagram.com/moemate.io" target="_blank" class="cursor-pointer w-6 h-6 text-moelightgray hover:text-moeblue fill-current">
+            <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 800 800" fill="currentColor" xml:space="preserve">
+            <path d="M255.1,56.5C145.5,56.5,56,146,56,255.6v288c0,109.5,89.5,198.9,199.1,198.9h288C652.5,742.5,742,653,742,543.4V255.6 C742,146,652.5,56.5,542.9,56.5H255.1z M255.1,109.3h287.8c81.2,0,146.4,65.1,146.4,146.4v287.8c0,81.2-65.1,146.4-146.1,146.4h-288 c-81.2,0-146.4-65.1-146.4-146.1v-288C108.8,174.4,173.9,109.3,255.1,109.3z M610.1,162c-14.6,0-26.4,11.7-26.4,26.4 c0,14.6,11.8,26.4,26.4,26.4c14.6,0,26.4-11.7,26.4-26.4C636.5,173.8,624.7,162,610.1,162z M399,214.8 c-101.6,0-184.7,83.1-184.7,184.7c0,101.6,83.1,184.7,184.7,184.7c101.6,0,184.7-83.1,184.7-184.7 C583.7,297.9,500.6,214.8,399,214.8z M399,267.6c73.2,0,131.9,58.7,131.9,131.9c0,73.2-58.7,131.9-131.9,131.9 c-73.2,0-131.9-58.7-131.9-131.9C267.1,326.3,325.8,267.6,399,267.6z"></path>
+            </svg>
+          </a>
+
+        </div>
+
+        <!-- designed by -->
+        <div class="flex flex-col items-center mb-8">
+          <div class="flex-1 text-center text-moelightgray text-[14px] flex flex-col justify-center items-center">
+            <div>© 2024 Webaverse Inc.</div>
+          </div>
+        </div>
+        <!-- end designed by -->
+
+      </div>
+      <!-- end social -->
+
+
+    </div>
+  </div>
+
+
+
+
+  {% block javascript %}
+  {% endblock %}
+</body>
+</html>    
