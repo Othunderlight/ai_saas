@@ -83,9 +83,12 @@ ASGI_APPLICATION = 'saas.asgi.application'
 
 
 CHANNEL_LAYERS = {
-    'default': {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    }
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": ["redis://red-cq71r95ds78s738o657g:6379"],
+        },
+    },
 }
 
 
